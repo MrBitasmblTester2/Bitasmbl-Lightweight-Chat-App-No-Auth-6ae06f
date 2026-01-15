@@ -1,0 +1,10 @@
+const express=require('express');
+const http=require('http');
+const {Server}=require('socket.io');
+const {PORT,CORS_ORIGIN}=require('./config');
+const {registerSocketHandlers}=require('./socketHandlers');
+const app=express();
+const server=http.createServer(app);
+const io=new Server(server,{cors:{origin:CORS_ORIGIN}});
+registerSocketHandlers(io);
+server.listen(PORT);
